@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Box Model</title>
+
+    <style>
+      /* Inserire Stile nella pagina web */
+      .elem {
+        border: solid #6AC5AC 3px;
+        position: relative;
+      }
+
+      /*
+        1. Utilizzare Box Model per vedere differenza di dimensione
+        2. Utilizzare box-sizing per eliminare differnza di dimensione
+      */
+      .simple {
+        width: 500px;
+        margin: 20px auto;
+        /* aggiunta box-sizing per correzione dimensione su boxmodel  */
+        -webkit-box-sizing: border-box;
+           -moz-box-sizing: border-box;
+                box-sizing: border-box;
+      }
+
+      .fancy {
+        width: 500px;
+        margin: 20px auto;
+        padding: 50px;
+        border-width: 10px;
+        /* aggiunta box-sizing per correzione dimensione su boxmodel  */
+        -webkit-box-sizing: border-box;
+           -moz-box-sizing: border-box;
+                box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Corso Web e Grafica</h1>
+    <p>Utilizzo del Box Model</p>
+
+    <div class="simple elem">
+      <p>
+        Io sono più piccolo...
+      </p>
+    </div>
+    <br>
+    <div class="fancy elem">
+      <p>
+        E io sono più grande!
+      </p>
+    </div>
+
+  </body>
+</html>

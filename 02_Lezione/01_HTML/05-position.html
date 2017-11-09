@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Position</title>
+
+    <style>
+      /* Inserire Stile nella pagina web */
+      .elem {
+        border: solid #6AC5AC 3px;
+      }
+
+      .elem-red {
+        border-color: red;
+      }
+
+      .elem-green {
+        border-color: green;
+      }
+
+      /*
+        1. Impostare i vari tipi di posizione
+      */
+      .static {
+        position: static;
+      }
+
+      .relative1 {
+        position: relative;
+      }
+      .relative2 {
+        position: relative;
+        top: -20px;
+        left: 20px;
+        background-color: white;
+        width: 500px;
+      }
+
+      .fixed {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        width: 200px;
+        background-color: white;
+      }
+
+      .relative {
+        position: relative;
+        width: 600px;
+        height: 400px;
+      }
+      .absolute {
+        position: absolute;
+        top: 120px;
+        right: 0;
+        width: 300px;
+        height: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Corso Web e Grafica</h1>
+    <p>Posizionamento blocchi</p>
+
+    <div class="static elem">
+      <p>
+        <code>static</code> è il valore predefinito. Un elemento con <code>position: static;</code> non è posizionato in nessun modo particolare. Un elemento statico è detto <em>non posizionato</em> e un elemento con <code>position</code> impostata a qualunque altro valore è detto <em>posizionato</em>
+      </p>
+    </div>
+
+    <br>
+
+    <div class="relative1 elem">
+      <p>
+        <code>relative</code> si comporta allo stesso modo di <code>static</code> a meno che si aggiungano alcune proprietà extra.
+      </p>
+    </div>
+
+    <div class="relative2 elem elem-red">
+      <p>
+        Impostare le proprietà <code>top</code>, <code>right</code>, <code>bottom</code>, e <code>left</code> di un elemento posizionato relativamente farà sì che esso risulti spostato dalla sua normale posizione. Gli altri contenuti non si infileranno negli spazi lasciati liberi dall'elemento in questione.
+      </p>
+    </div>
+
+    <br>
+
+    <div class="fixed elem elem-green">
+      <p>
+        Ciao! Io sono un blocco in posizione fissa.
+      </p>
+    </div>
+
+    <br>
+
+    <div class="relative elem">
+      <p>
+        Questo elemento è posizionato relativamente. Se questo elemento avesse <code>position: static;</code> il suo figlio posizionato in maniera assoluta sarebbe scappato via e sarebbe stato posizionato relativamente al body del documento.
+      </p>
+      <div class="absolute elem elem-red">
+        <p>
+          Questo elemento è posizionato in maniera assoluta. È posizionato relativamente all'elemento che lo contiene.
+        </p>
+      </div>
+    </div>
+
+  </body>
+</html>

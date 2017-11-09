@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Layout Pagina web</title>
+
+    <style>
+      /* Inserire Stile nella pagina web */
+      .elem {
+        border: solid #6AC5AC 2px;
+        box-sizing: border-box;
+      }
+
+      /*
+        1. Impostare layout Pagina con sidebar sinistra
+      */
+
+    </style>
+  </head>
+  <body>
+    <h1>Corso Web e Grafica</h1>
+    <p>Layout pagina web</p>
+
+
+    <div class="container elem">
+
+      <nav class="elem elem-red">
+        <ul>
+          <li>
+            <a href="#">Home</a>
+          </li>
+          <li>
+            <a href="#">Taco Menu</a>
+          </li>
+          <li>
+            <a href="#">Lista delle Bozze</a>
+          </li>
+          <li>
+            <a href="#">Hours</a>
+          </li>
+          <li>
+            <a href="#">Directions</a>
+          </li>
+          <li>
+            <a href="#">Contatti</a>
+          </li>
+        </ul>
+      </nav>
+
+      <section class="elem elem-green">
+        <p>
+          Lo stile di <code>margin-left</code> per le <code>section</code> fa sì che ci sia spazio per il <code>nav</code>. Se così non fosse gli elementi absolute e static si sovrapporrebbero.
+        </p>
+      </section>
+
+      <section class="elem elem-green ipsum">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Mauris ante ligula, facilisis sed ornare eu, lobortis in odio. Praesent convallis urna a lacus interdum ut hendrerit risus congue. Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare turpis. Donec vitae dui eget tellus gravida venenatis. Integer fringilla congue eros non fermentum. Sed dapibus pulvinar nibh tempor porta. Cras ac leo purus. Mauris quis diam velit.
+        </p>
+      </section>
+
+      <section class="elem elem-green">
+        <p>
+          Guarda cosa succede se ridimensioni il tuo browser. Funziona bene!
+        </p>
+      </section>
+
+      <footer class="elem elem-orange">
+        <p>
+          Se utilizzi una testata o un footer posizionati fissi, assicurati che ci sia abbastanza spazio per loro! Io metto un <code>margin-bottom</code> nel <code>body</code>.
+        </p>
+      </footer>
+
+    </div>
+
+  </body>
+</html>
