@@ -3,9 +3,8 @@
 console.log(__dirname);
 
 // Dichiarazione librerie da utilizzare
-var fs = require('fs');
-var parse = require('csv-parse');
-
+const fs = require('fs');
+const parse = require('csv-parse');
 
 let record = [];
 let list = [];
@@ -28,10 +27,11 @@ parser.on('error', function(err){
 parser.on('finish', function(){
     list.forEach(function(item) {
         if(item) {
-            console.log('record: %s %s %s ', item[0], item[1], item[2]);
+            //console.log('record: %s %s %s ', item[0], item[1], item[2]);
+            console.dir(item);
         }
     });
 });
 
 
-fs.createReadStream(__dirname + '/data/province.csv').pipe(parser);
+fs.createReadStream(__dirname + '/data/istat_province.csv').pipe(parser);

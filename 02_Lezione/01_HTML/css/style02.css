@@ -9,4 +9,14 @@ h2 {
 li {
   font-weight: bold;
   line-height: 30px;
+  width: 200px;
+  float: left;
+}
+
+#capitolo {
+  font-size: 12pt;
+}
+
+#sottocapitolo {
+  font-size: 2em;
 }
