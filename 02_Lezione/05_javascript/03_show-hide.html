@@ -1,14 +1,36 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <title>Corso BT </title>
+</head>
 <body>
 
-<h2>What Can JavaScript Do?</h2>
+    <h2>What Can JavaScript Do?</h2>
 
-<p id="demo">JavaScript can hide HTML elements.</p>
+    <p id="demo">JavaScript can hide HTML elements.</p>
 
-<button type="button" onclick="document.getElementById('demo').style.display='none'">Nascondi</button>
+    <button id="showHide" type="button" onclick="showHide()">Hide</button>
 
-<button type="button" onclick="document.getElementById('demo').style.display='block'">Mostra</button>
+    <button type="button" onclick="document.getElementById('demo').style.display='none'">Nascondi</button>
 
+    <button type="button" onclick="document.getElementById('demo').style.display='block'">Mostra</button>
+
+    <script>
+        var show = true;
+        var elem = document.getElementById('demo');
+        var btn = document.getElementById('showHide');
+
+        var showHide = function() {
+
+            if(show) {
+                elem.style.visibility  = 'hidden';
+                btn.innerText = 'Show';
+            } else {
+                elem.style.visibility = 'visible';
+                btn.innerText = 'Hide';
+            }
+            show = !show;
+        }
+    </script>
 </body>
 </html> 
