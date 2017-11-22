@@ -3,8 +3,10 @@
 // Controllers
 const TodoCtrl = require('../controllers/todoCtrl');
 
-module.exports = function(app) {
-    var todoCtrl = new TodoCtrl();
+module.exports = function(app, db) {
+    var todoCtrl = new TodoCtrl(db);
+
+    console.log('routes');
 
     // Home del sito
     app.get('/', function(req, res, next){
@@ -14,7 +16,15 @@ module.exports = function(app) {
 
     // get All todos
     app.get('/todos', function(req, res){
-        res.send(todoCtrl.readAll());
+        console.log('/todos');
+        todoCtrl.readAll(function(err, data){
+            if(err) {
+                res.status(500).send(err);
+            } else {
+                console.dir(data);
+                res.send(data);
+            }
+        });
     });
 
     // get One record
@@ -36,10 +46,28 @@ module.exports = function(app) {
     // con oggetto passat nel body della richiesta
     app.post('/todos', function(req, res){
         var item = req.body;
-        console.log('req.body-------------');
-        console.dir(req.body);
         var obj = todoCtrl.create(item);
         res.status(201).send(obj);
     });
+
+    // put - aggiornamento dati
+    app.put('/todos/:id', function(req, res){
+        var id = req.params.id;
+        var obj = req.body;
+        var item = todoCtrl.update(id, obj);
+        res.status(203).send(item);
+    });
+
     
+    // delete
+    app.delete('/todos/:id', function(req, res){
+        var id = req.params.id;
+        var result = todoCtrl.delete(id);
+        if(result) {
+            res.status(203).send();
+        } else {
+            res.status(400).send('Record non trovato');
+        }
+    });
+
 }

@@ -1,13 +1,17 @@
 var Todo = require('../models/todo');
 
+/* Simulazione Array todos in memoria
 var todos = [];
 
 for(var i=1; i<11; i++) {
     todos.push(new Todo('Attività ' + i));
 }
+*/
 
-module.exports = function() {
+module.exports = function(db) {
     var self = this;
+
+    this.todos = db.collection('todos');
 
     // CRUD
     // C - Create
@@ -17,8 +21,8 @@ module.exports = function() {
 
 
     // readAll
-    this.readAll = function() {
-        return todos;
+    this.readAll = function(cb) {
+        self.todos.find().toArray(cb);
     }
 
     // Read singolo record
@@ -61,7 +65,7 @@ module.exports = function() {
         */
         
         if(index>-1) {
-            todos.slice(index, 1);
+            todos.splice(index, 1);
             return true;
         } else {
             return false;
