@@ -4,20 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>BT WebApp</title>
 </head>
 <body>
-    <h1 ondblclick="saluto()">Strumento di Saluto</h1>
-    <p>Come ti Chiami?</p>
+    <h1>WebApp Todos</h1>
 
-    <h2 id="risposta">....</h2>
+    <div>
+        <label for="nome">nome attività:<label>
+        <input id="nuovaAttivita" type="text" name="nome" />
 
-    <button onclick="saluto()">Click</button>
-    <script>
-        var saluto = function() {
-            var elem = document.getElementById('risposta');
-            elem.innerHTML += 'Andrea ';
-        }
-    </script>
+        <button type="button" onclick="inviaDati()">Crea</button>
+    </div>
+
+    <hr />
+    <button type="button" onclick="caricaDati()">Carica Dati</button>
+    
+    <table id="elenco">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Attività</th>
+                <th>Evasa</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>    
+    <script src="/js/main.js"></script>
+
 </body>
 </html>
