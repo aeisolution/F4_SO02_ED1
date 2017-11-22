@@ -5,35 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>BT WebApp</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">        
+
 </head>
 <body>
-    <h1>WebApp Todos</h1>
+    <div class="container">
 
-    <div>
-        <label for="nome">nome attività:<label>
-        <input id="nuovaAttivita" type="text" name="nome" />
+        <h1>WebApp Todos</h1>
 
-        <button type="button" onclick="inviaDati()">Crea</button>
+        <div class="row">
+            <div class="form form-inline">
+                <div class="form-group">
+                    <label for="exampleInputName2">Nome Attività</label>
+                    <input type="text" class="form-control" id="nuovaAttivita" placeholder="">
+                </div>
+                <button id="btnInvia" class="btn btn-default" type="button">Crea</button>
+            </div>
+        </div>
+
+    
+        <div class="row">
+            <button id="btnCarica" class="btn btn-primary" type="button">Carica Dati</button>
+
+
+            <table id="elenco" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Attività</th>
+                        <th>Evasa</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+        
     </div>
 
-    <hr />
-    <button type="button" onclick="caricaDati()">Carica Dati</button>
-    
-    <table id="elenco">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Attività</th>
-                <th>Evasa</th>
-            </tr>
-        </thead>
-        <tbody>
-
-        </tbody>
-    </table>
-
     <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>    
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
     <script src="/js/main.js"></script>
 
 </body>
