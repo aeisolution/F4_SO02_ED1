@@ -3,10 +3,8 @@
 // Controllers
 const TodoCtrl = require('../controllers/todoCtrl');
 
-module.exports = function(app, db) {
-    var todoCtrl = new TodoCtrl(db);
-
-    console.log('routes');
+module.exports = function(app) {
+    var todoCtrl = new TodoCtrl();
 
     // Home del sito
     app.get('/', function(req, res, next){

@@ -6,8 +6,6 @@ var express = require('express'),
     logger = require('morgan'),
     app =  express();
 
-var MongoClient = require('mongodb').MongoClient;
-
 var routes = require('./routes');
 
 /*
@@ -28,27 +26,20 @@ app.use(logger('dev'));
 // Risorse statiche
 app.use(express.static(__dirname + '/static'));
 
-
-
 // Middleware di autentizazione
 
-MongoClient.connect('mongodb://localhost:27017/todos1-db', function(err, db){
-    if(err) throw err;
+// Definizione routes
+routes(app);
 
-    console.log('connection db');
-    // Definizione routes
-    routes(app, db);
-
-    // Not found 404
-    app.use(function(req, res, next){
-        console.log('File non trovato');
-        res.status(404).send('File non trovato');
-    });
-
-    // Avvio Server su porta 8080
-    app.listen(8080);
-
-    console.log('Webserver started on port 8080');    
+// Not found 404
+app.use(function(req, res, next){
+    console.log('File non trovato');
+    res.status(404).send('File non trovato');
 });
+
+// Avvio Server su porta 8080
+app.listen(8080);
+
+console.log('Webserver started on port 8080');    
 
 
