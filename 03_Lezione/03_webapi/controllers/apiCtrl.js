@@ -1,7 +1,5 @@
 var ObjectID = require('mongodb').ObjectID;
 
-var Todo = require('../models/todo');
-
 /* Simulazione Array todos in memoria
 var todos = [];
 
@@ -13,7 +11,7 @@ for(var i=1; i<11; i++) {
 module.exports = function(db) {
     var self = this;
 
-    this.todos = db.collection('todos');
+    this.db = db;
 
     // CRUD
     // C - Create
@@ -23,8 +21,10 @@ module.exports = function(db) {
 
 
     // readAll
-    this.readAll = function(cb) {
-        self.todos.find().toArray(cb);
+    this.readAll = function(coll, cb) {
+        var entity = self.db.collection(coll);
+
+        entity.find().toArray(cb);
     }
 
     // Read singolo record
@@ -34,27 +34,24 @@ module.exports = function(db) {
     }
 
     // Create
-    this.create = function(item, cb) {
-        var obj = new Todo(item.nome);
-
-        self.todos.insert(obj, cb);
+    this.create = function(coll, item, cb) {
+        var entity = self.db.collection(coll);
+        
+        entity.insert(item, cb);
     }
 
     // Update
-    this.update = function(id, item) {
-        var obj = self.read(id);
-
-        // TODO: Verifica oggetto vuoto
-        obj.nome = item.nome;
-        obj.evasa = item.evasa;   
-        return obj;     
+    this.update = function(coll, id, item, cb) {
+        var entity = self.db.collection(coll);
+        var filter = { _id: new ObjectID(id)};
+        entity.update(filter, item, cb);
     }
 
     // Delete
-    this.delete = function(id, cb) {
-        console.dir({_id: id});
+    this.delete = function(coll, id, cb) {
+        var entity = self.db.collection(coll);
         var filter = { _id: new ObjectID(id) };
 
-        self.todos.remove(filter, cb);
+        entity.remove(filter, cb);
     }
 }

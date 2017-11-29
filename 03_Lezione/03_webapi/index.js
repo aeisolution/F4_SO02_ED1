@@ -8,7 +8,8 @@ var express = require('express'),
 
 var MongoClient = require('mongodb').MongoClient;
 
-var routes = require('./routes');
+var routes  = require('./routes'),
+    api     = require('./routes/api');
 
 /*
 app.use(function(req, res, next){
@@ -35,9 +36,10 @@ app.use(express.static(__dirname + '/static'));
 MongoClient.connect('mongodb://localhost:27017/todos1-db', function(err, db){
     if(err) throw err;
 
-    console.log('connection db');
+
     // Definizione routes
     routes(app, db);
+    api(app, db);
 
     // Not found 404
     app.use(function(req, res, next){

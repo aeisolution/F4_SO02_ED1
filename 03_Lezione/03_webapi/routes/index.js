@@ -46,8 +46,13 @@ module.exports = function(app, db) {
     // con oggetto passat nel body della richiesta
     app.post('/todos', function(req, res){
         var item = req.body;
-        var obj = todoCtrl.create(item);
-        res.status(201).send(obj);
+        todoCtrl.create(item, function(err, data){
+            if(err) 
+                return res.status(400).send(err);            
+
+            console.dir(data);
+            res.status(201).send(data);
+        });
     });
 
     // put - aggiornamento dati
@@ -62,12 +67,15 @@ module.exports = function(app, db) {
     // delete
     app.delete('/todos/:id', function(req, res){
         var id = req.params.id;
-        var result = todoCtrl.delete(id);
-        if(result) {
-            res.status(203).send();
-        } else {
-            res.status(400).send('Record non trovato');
-        }
+        todoCtrl.delete(id, function(err, data){
+            if(err) {
+                console.log(err);
+                return res.status(400).send(err);
+            }
+            console.dir(data);
+            res.status(203).send(data);            
+        });
+        
     });
 
 }
