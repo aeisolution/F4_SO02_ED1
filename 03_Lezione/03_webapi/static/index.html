@@ -43,11 +43,32 @@
                 </div><!-- /input-group -->
             </div>
 
+            <!-- Paginazione -->
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li>
+                    <a href="#" onclick="prevPage()" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                    </li>
+                    <li><a href="#" onclick="filtraDati(1)" >1</a></li>
+                    <li><a href="#" onclick="filtraDati(2)">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                    <a href="#" onclick="nextPage()" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                    </li>
+                </ul>
+            </nav>
+
             <table id="elenco" class="table table-hover">
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Attività</th>
+                        <th>Categoria</th>
                         <th>Evasa</th>
                         <th>Comandi</th>
                     </tr>
@@ -56,6 +77,28 @@
 
                 </tbody>
             </table>
+
+            <!-- Paginazione -->
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li>
+                    <a href="#" onclick="prevPage()" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                    </li>
+                    <li><a href="#" onclick="filtraDati(1)" >1</a></li>
+                    <li><a href="#" onclick="filtraDati(2)">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                    <a href="#" onclick="nextPage()" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                    </li>
+                </ul>
+            </nav>
+
         </div>
         
     </div>
@@ -73,8 +116,14 @@
                 <div class="form">
                     <input type="hidden" id="modificaId" />
                     <div class="form-group">
-                        <label for="exampleInputName2">Nome Attività</label>
+                        <label>Nome Attività</label>
                         <input type="text" class="form-control" id="modificaAttivita">
+                    </div>
+                    <div class="form-group">
+                        <label>categoria</label>
+                        <select id="modificaCategoria" class="form-control">
+                                <option value="">--- selezionare ---</option>
+                        </select>
                     </div>
                     <div class="checkbox">
                         <label>
@@ -98,5 +147,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     
     <script src="/js/main.js"></script>
+    <script>
+        $.ajax({
+            url: '/api/categorie',
+            method: 'GET',
+            success: function(data) {
+                
+                for(var i=0; i<data.length; i++) {
+                    var opt = '<option value="' + data[i].nome + '">' + data[i].nome + '</option>';
+                    $('#modificaCategoria').append(opt);
+                }
+            }
+        });
+    </script>
 </body>
 </html>

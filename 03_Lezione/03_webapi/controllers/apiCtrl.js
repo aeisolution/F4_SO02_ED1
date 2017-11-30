@@ -43,8 +43,14 @@ module.exports = function(db) {
     // Update
     this.update = function(coll, id, item, cb) {
         var entity = self.db.collection(coll);
-        var filter = { _id: new ObjectID(id)};
-        entity.update(filter, item, cb);
+
+        var filter = { _id: new ObjectID(id) };
+
+        var obj = {};
+        obj.nome = item.nome || 'non definito';
+
+        // comando di Update su collection con operatore $set
+        entity.update(filter, { '$set': obj }, cb);         
     }
 
     // Delete

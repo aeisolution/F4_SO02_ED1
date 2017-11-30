@@ -5,12 +5,12 @@ $("#btnInvia" ).on("click", function( event ) {
 });
 
 function handlerRow() {
+    /*
     $(".btn_change_edit" ).on("click", function( event ) {
-        console.log('btn_change_edit');
-        console.dir($(this));
         $(this).closest('tr').toggleClass('edit');
         
     });
+    */
 }
 
 
@@ -18,7 +18,8 @@ function handlerRow() {
 function caricaRiga(elem) {
     $('#elenco tbody').append('<tr><td>' 
         + '<span>' + elem.nome + '</span>' 
-        + '<input type="text" value="' + elem.nome + '" />'
+        + '<input name="id" type="hidden" value="' + elem._id + '" />'
+        + '<input name="nome" type="text" value="' + elem.nome + '" />'
         + '</td><td>' 
         + '<div class="btn_edit">'
         + '<button class="btn btn-default btn_change_edit">annulla</button> ' 
@@ -30,6 +31,19 @@ function caricaRiga(elem) {
         + '<button class="btn btn-danger" onclick="cancella(\'' + elem._id + '\')">cancella</button>' 
         + '</div>'
         + '</td></tr>');
+
+        $("#elenco tbody tr:last .btn_change_edit" ).on("click", function( event ) {
+            $(this).closest('tr').toggleClass('edit');
+        });        
+
+        $("#elenco tbody tr:last .btn_salva" ).on("click", function( event ) {
+            var tr = $(this).closest('tr');
+            var id = tr.find('[name="id"]').val();
+            var nome = tr.find('[name="nome"]').val();
+            
+            updateDati(id, nome);
+        });        
+
 }
 
 
@@ -46,7 +60,7 @@ function filtraDati() {
             data.forEach(function(elem) {
                 caricaRiga(elem);
             });            
-            handlerRow();    
+            //handlerRow();    
         }
     });
     
@@ -64,7 +78,7 @@ function inviaDati() {
         },
         success: function(obj) {
             caricaRiga(obj.ops[0]);    
-            handlerRow();    
+            //handlerRow();    
 
             toastr.success('Record salvato');
         } 
@@ -86,26 +100,17 @@ function cancella(id) {
     });
 }
 
-function modifica(id, nome, evasa) {
-
-}
-
-function updateDati() {
-    var id = $('#modificaId').val();
-    var nome = $('#modificaCategoria').val();
-    var evasa = $('#modificaEvasa:checked').val() == 'on' ? true : false;
+function updateDati(id, nome) {
 
     $.ajax({
         url: '/api/categorie/' + id,
         method: 'PUT',
         data: {
             id: id,
-            nome: nome,
-            evasa: evasa
+            nome: nome
         },
         success: function(data) {
-            $('#myModal').modal('hide');
-            caricaDati();
+            filtraDati();
         },
         failure: function(data){
             alert('Errore Salvataggio dati');

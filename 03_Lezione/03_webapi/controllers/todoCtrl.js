@@ -15,6 +15,8 @@ module.exports = function(db) {
 
     this.todos = db.collection('todos');
 
+    this.pageSize = 10;
+
     // CRUD
     // C - Create
     // R - Read (All per tutti - One per uno)
@@ -23,12 +25,15 @@ module.exports = function(db) {
 
 
     // readAll
-    this.readAll = function(cerca, cb) {
+    this.readAll = function(page = 1, cerca, cb) {
         var filter = {};
         if(cerca.length>0)
             filter = { nome: { $regex: cerca, $options: 'i' } }
 
-        self.todos.find(filter).toArray(cb);
+        self.todos.find(filter)
+                  .skip(self.pageSize * (page - 1))
+                  .limit(self.pageSize)                    
+                  .toArray(cb);
     }
 
     // Read singolo record
@@ -51,6 +56,7 @@ module.exports = function(db) {
 
         var obj = {};
         obj.nome = item.nome || 'non definito';
+        obj.categoria = item.categoria || '';
         obj.evasa = item.evasa || false;
 
         // comando di Update su collection con operatore $set

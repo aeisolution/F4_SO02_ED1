@@ -17,8 +17,9 @@ module.exports = function(app, db) {
     // get All todos
     app.get('/todos', function(req, res){
         var cerca = req.query.cerca || '';
+        var page = req.query.page || 1;
 
-        todoCtrl.readAll(cerca, function(err, data){
+        todoCtrl.readAll(page, cerca, function(err, data){
             if(err) {
                 res.status(500).send(err);
             } else {

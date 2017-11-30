@@ -46,9 +46,14 @@ module.exports = function(app, db) {
 
         var id = req.params.id;
         var obj = req.body;
-        var item = apiCtrl.update(id, obj);
-        res.status(203).json(item);
+        apiCtrl.update(coll, id, obj, function(err, data){
+            if(err)
+                return res.status(500).json(err);
+
+            res.status(203).json(data);
+        });
     });
+    
 
     
     // delete

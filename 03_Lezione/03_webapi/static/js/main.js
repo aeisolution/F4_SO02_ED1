@@ -1,5 +1,19 @@
 // COdice di elaborazione client per pagina index.html
 
+var page = 1;
+
+function nextPage() {
+    page++;
+    filtraDati(page);
+}
+
+function prevPage() {
+    if(page>1) {
+        page--;
+        filtraDati(page);
+    } 
+}
+
 $("#btnCarica" ).on("click", function( event ) {
   caricaDati();
 });
@@ -11,12 +25,21 @@ $("#btnInvia" ).on("click", function( event ) {
 // Definzione funzioni base
 function caricaRiga(elem) {
     $('#elenco tbody').append('<tr><td>' 
-        + elem._id + '</td><td>' 
+        + '<input name="id" type="hidden" value="' + elem._id + '" />'           
+        + '<input name="nome" type="hidden" value="' + elem.nome + '" />'           
+        + '<input name="categoria" type="hidden" value="' + elem.categoria + '" />'           
+        + '<input name="evasa" type="hidden" value="' + elem.evasa + '" />'           
         + elem.nome + '</td><td>' 
+        + elem.categoria + '</td><td>' 
         + elem.evasa + '</td><td>'
-        + '<button class="btn btn-default" onclick="modifica(\'' + elem._id + '\', \'' + elem.nome + '\', ' + elem.evasa + ')">modifica</button> ' 
+        + '<button class="btn btn-default btn_modifica">modifica</button> ' 
         + '<button class="btn btn-danger" onclick="cancella(\'' + elem._id + '\')">cancella</button>' 
         + '</td></tr>');
+
+    $('#elenco tbody tr:last .btn_modifica').on('click', function(event){
+        var tr = $(this).closest('tr');
+        modifica(tr);
+    });
 }
 
 
@@ -36,12 +59,14 @@ function caricaDati() {
     });
 }
 
-function filtraDati() {
+function filtraDati(page) {
     var cerca = $('#strCerca').val();
+
+    console.log('filtraDati(' + page + ')');
 
     // GET /todos/
     $.ajax({
-        url: "/todos?cerca=" + cerca,
+        url: "/todos?cerca=" + cerca +"&page=" + page,
         method: "GET",
         success: function(data) {
             $('#elenco tbody').html('');
@@ -86,9 +111,15 @@ function cancella(id) {
     });
 }
 
-function modifica(id, nome, evasa) {
+function modifica(tr) {
+    var id          = tr.find('[name="id"]').val();
+    var nome        = tr.find('[name="nome"]').val();
+    var categoria   = tr.find('[name="categoria"]').val();
+    var evasa       = tr.find('[name="evasa"]').val();
+
     $('#modificaId').val(id);
     $('#modificaAttivita').val(nome);
+    $('#modificaCategoria').val(categoria);
     $('#modificaEvasa').prop('checked', evasa);
 
     // Apertura finestra Modale
@@ -98,6 +129,7 @@ function modifica(id, nome, evasa) {
 function updateDati() {
     var id = $('#modificaId').val();
     var nome = $('#modificaAttivita').val();
+    var categoria = $('#modificaCategoria').val();
     var evasa = $('#modificaEvasa:checked').val() == 'on' ? true : false;
 
     $.ajax({
@@ -106,6 +138,7 @@ function updateDati() {
         data: {
             id: id,
             nome: nome,
+            categoria: categoria,
             evasa: evasa
         },
         success: function(data) {
