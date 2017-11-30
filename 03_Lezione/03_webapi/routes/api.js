@@ -42,6 +42,8 @@ module.exports = function(app, db) {
 
     // put - aggiornamento dati
     app.put(url + '/:collection/:id', function(req, res){
+        var coll = req.params.collection;
+
         var id = req.params.id;
         var obj = req.body;
         var item = apiCtrl.update(id, obj);
@@ -51,8 +53,10 @@ module.exports = function(app, db) {
     
     // delete
     app.delete(url + '/:collection/:id', function(req, res){
+        var coll = req.params.collection;
+
         var id = req.params.id;
-        apiCtrl.delete(id, function(err, data){
+        apiCtrl.delete(coll, id, function(err, data){
             if(err) {
                 console.log(err);
                 return res.status(400).json(err);

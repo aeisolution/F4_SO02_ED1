@@ -14,17 +14,19 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
+
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
     <div class="container">
 
-        <h1>WebApp Todos</h1>
+        <h1>WebApp Todos - Categorie</h1>
 
         <div class="row">
             <div class="form-inline">
                 <div class="form-group">
-                    <label for="exampleInputName2">Nome Attività</label>
-                    <input type="text" class="form-control" id="nuovaAttivita" placeholder="">
+                    <label for="exampleInputName2">Nome Categoria</label>
+                    <input type="text" class="form-control" id="nuovaCategoria" placeholder="">
                 </div>
                 <button id="btnInvia" class="btn btn-default" type="button">Crea</button>
             </div>
@@ -32,8 +34,6 @@
 
     
         <div class="row">
-            <button id="btnCarica" class="btn btn-primary" type="button">Carica Dati</button>
-
             <div class="form-inline">
                 <div class="input-group">
                     <input id="strCerca" type="text" class="form-control" placeholder="Search for...">
@@ -46,9 +46,7 @@
             <table id="elenco" class="table table-hover">
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Attività</th>
-                        <th>Evasa</th>
+                        <th>Categoria</th>
                         <th>Comandi</th>
                     </tr>
                 </thead>
@@ -61,42 +59,12 @@
     </div>
 
 
-    <!-- Modal form -->
-    <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Modifica Dati</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form">
-                    <input type="hidden" id="modificaId" />
-                    <div class="form-group">
-                        <label for="exampleInputName2">Nome Attività</label>
-                        <input type="text" class="form-control" id="modificaAttivita">
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input id="modificaEvasa" type="checkbox"> Evasa
-                        </label>
-                    </div>                                        
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="updateDati()">Salva dati</button>
-            </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->    
-
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     
-    <script src="/js/main.js"></script>
+    <script src="/js/categorie.js"></script>
 </body>
 </html>

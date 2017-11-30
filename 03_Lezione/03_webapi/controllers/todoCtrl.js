@@ -23,14 +23,19 @@ module.exports = function(db) {
 
 
     // readAll
-    this.readAll = function(cb) {
-        self.todos.find().toArray(cb);
+    this.readAll = function(cerca, cb) {
+        var filter = {};
+        if(cerca.length>0)
+            filter = { nome: { $regex: cerca, $options: 'i' } }
+
+        self.todos.find(filter).toArray(cb);
     }
 
     // Read singolo record
-    this.read = function(id) {
-        var items = todos.filter((d) => d.id == id);
-        return items.length > 0 ? items[0] : {};
+    this.read = function(id, cb) {
+        var filter = { _id: new ObjectID(id) };
+
+        self.todos.find(filter).toArray(cb);
     }
 
     // Create
@@ -41,13 +46,15 @@ module.exports = function(db) {
     }
 
     // Update
-    this.update = function(id, item) {
-        var obj = self.read(id);
+    this.update = function(id, item, cb) {
+        var filter = { _id: new ObjectID(id) };
 
-        // TODO: Verifica oggetto vuoto
-        obj.nome = item.nome;
-        obj.evasa = item.evasa;   
-        return obj;     
+        var obj = {};
+        obj.nome = item.nome || 'non definito';
+        obj.evasa = item.evasa || false;
+
+        // comando di Update su collection con operatore $set
+        self.todos.update(filter, { '$set': obj }, cb);
     }
 
     // Delete

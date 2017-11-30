@@ -16,8 +16,9 @@ module.exports = function(app, db) {
 
     // get All todos
     app.get('/todos', function(req, res){
-        console.log('/todos');
-        todoCtrl.readAll(function(err, data){
+        var cerca = req.query.cerca || '';
+
+        todoCtrl.readAll(cerca, function(err, data){
             if(err) {
                 res.status(500).send(err);
             } else {
@@ -30,18 +31,17 @@ module.exports = function(app, db) {
     // get One record
     app.get('/todos/:id', function(req, res){
         var id = req.params.id;
-        res.send(todoCtrl.read(id));
+
+        todoCtrl.read(id, function(err, data){
+            if(err)
+                return res.status(500).send(err);
+
+            res.send(data.length > 0 ? data[0] : {} );
+        });
     });
 
-    // Creazione di nuova attività (opzione 1 con metodo get)
-    // es. URL localhost/todos/new/nome_attività
-    app.get('/todos/new/:nome', function(req, res){
-        var nome_attivita = req.params.nome;
-        var obj = todoCtrl.create({ nome: nome_attivita });
-        res.status(201).send(obj);
-    });
 
-
+   
     // es. URL localhost/todos
     // con oggetto passat nel body della richiesta
     app.post('/todos', function(req, res){
@@ -59,8 +59,13 @@ module.exports = function(app, db) {
     app.put('/todos/:id', function(req, res){
         var id = req.params.id;
         var obj = req.body;
-        var item = todoCtrl.update(id, obj);
-        res.status(203).send(item);
+
+        todoCtrl.update(id, obj, function(err, data){
+            if(err) 
+                return res.status(500).send(err);
+
+            res.status(203).send(data);
+        });
     });
 
     

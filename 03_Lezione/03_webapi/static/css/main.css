@@ -1,4 +1,23 @@
 
-body {
-    background-color: red;
+/* Condizione di View dei Dati  */
+#elenco tr span,
+#elenco tr .btn_view {
+    display: block;
+}
+
+#elenco tr input,
+#elenco tr .btn_edit {
+    display: none;
+}
+
+
+/* Condizione di Editing dei Dati  */
+#elenco tr.edit span,
+#elenco tr.edit .btn_view {
+    display: none;
+}
+
+#elenco tr.edit input,
+#elenco tr.edit .btn_edit {
+    display: block;
 }
